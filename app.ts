@@ -26,6 +26,7 @@ function fillField() {
     cell.addEventListener('mousemove', addColor)
     cell.addEventListener('mouseout', removeColor)
     cell.addEventListener('touchstart', addColor)
+    cell.addEventListener('touchmove', addColor)
     cell.addEventListener('touchend', removeColor)
   }
 }

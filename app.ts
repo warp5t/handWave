@@ -4,12 +4,12 @@ const mainContainer = document.querySelector('.main-container') as HTMLElement;
 
 // mainContainer.style.backgroundColor = 'red';
 
-function addColor(event: MouseEvent) {
+function addColor(event: MouseEvent | TouchEvent) {
   const element = event.target as HTMLDivElement;
   element.classList.add('activCell');
 }
 
-function removeColor(event: MouseEvent) {
+function removeColor(event: MouseEvent | TouchEvent) {
   const element = event.target as HTMLDivElement;
   element.classList.remove('activCell');
 }
@@ -25,6 +25,8 @@ function fillField() {
     cell.classList.add('cell');
     cell.addEventListener('mousemove', addColor)
     cell.addEventListener('mouseout', removeColor)
+    cell.addEventListener('touchstart', addColor)
+    cell.addEventListener('touchend', removeColor)
   }
 }
 

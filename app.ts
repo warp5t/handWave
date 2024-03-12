@@ -1,4 +1,4 @@
-const mainContainer = document.querySelector('.main-container') as HTMLElement;
+const mainContainer = document.getElementById('mainContainer') as HTMLElement;
 let lastTouchedCell: HTMLDivElement | null = null; // Track the last touched cell
 
 function addColor(event: MouseEvent | TouchEvent) {
@@ -37,19 +37,30 @@ function fillField() {
     const cell = document.createElement('div');
     mainContainer.appendChild(cell);
     cell.classList.add('cell');
-
-    cell.addEventListener('touchstart', (event) => {
-      if (event instanceof TouchEvent) {
-        const touch = event.touches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLDivElement;
-        console.log(element);
-      }
-    })
-    cell.addEventListener('mousemove', addColor);
-    cell.addEventListener('mouseout', removeColor);
-    cell.addEventListener('touchmove', addColor, {passive: true});
-    cell.addEventListener('touchstart', addColor, {passive: true});
+    cell.id = `cell_${i}`;
   }
 }
 
 fillField();
+
+function timeDelay(tEl: HTMLDivElement) {
+  setTimeout(() => {
+    tEl.classList.remove('activCell')
+  }, 50);
+}
+
+mainContainer.addEventListener('touchmove', (event) => {
+  addColor(event)
+})
+
+mainContainer.addEventListener('touchstart', (event) => {
+  addColor(event)
+})
+
+mainContainer.addEventListener('mousemove', (event) => {
+  if (event.target !== null) {
+    const targetElement = event.target as HTMLDivElement;
+    targetElement.classList.add('activCell')
+    timeDelay(targetElement)
+  }
+})

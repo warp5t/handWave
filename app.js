@@ -1,4 +1,4 @@
-var mainContainer = document.querySelector('.main-container');
+var mainContainer = document.getElementById('mainContainer');
 var lastTouchedCell = null; // Track the last touched cell
 function addColor(event) {
     var element = null;
@@ -32,17 +32,25 @@ function fillField() {
         var cell = document.createElement('div');
         mainContainer.appendChild(cell);
         cell.classList.add('cell');
-        cell.addEventListener('touchstart', function (event) {
-            if (event instanceof TouchEvent) {
-                var touch = event.touches[0];
-                var element = document.elementFromPoint(touch.clientX, touch.clientY);
-                console.log(element);
-            }
-        });
-        cell.addEventListener('mousemove', addColor);
-        cell.addEventListener('mouseout', removeColor);
-        cell.addEventListener('touchmove', addColor, { passive: true });
-        cell.addEventListener('touchstart', addColor, { passive: true });
+        cell.id = "cell_" + i;
     }
 }
 fillField();
+function timeDelay(tEl) {
+    setTimeout(function () {
+        tEl.classList.remove('activCell');
+    }, 50);
+}
+mainContainer.addEventListener('touchmove', function (event) {
+    addColor(event);
+});
+mainContainer.addEventListener('touchstart', function (event) {
+    addColor(event);
+});
+mainContainer.addEventListener('mousemove', function (event) {
+    if (event.target !== null) {
+        var targetElement = event.target;
+        targetElement.classList.add('activCell');
+        timeDelay(targetElement);
+    }
+});

@@ -1,5 +1,5 @@
 const mainContainer = document.getElementById('mainContainer') as HTMLElement;
-let lastTouchedCell: HTMLDivElement | null = null; // Track the last touched cell
+let lastTouchedCell: HTMLDivElement | null = null;
 
 function addColor(event: MouseEvent | TouchEvent) {
   let element: HTMLDivElement | null = null;
@@ -28,7 +28,7 @@ function removeColor(event: MouseEvent | TouchEvent) {
 }
 
 function fillField() {
-  const heightCell = 10;
+  const heightCell = 10.2;
   const countY = Math.floor(window.innerHeight / heightCell);
   const countX = Math.floor(window.innerWidth / heightCell);
   const countCell = countX * countY;
@@ -45,7 +45,8 @@ fillField();
 
 function timeDelay(tEl: HTMLDivElement) {
   setTimeout(() => {
-    tEl.classList.remove('activCell')
+    tEl.classList.remove('activCell');
+    (window as any).javascript.gc();
   }, 50);
 }
 
@@ -64,3 +65,6 @@ mainContainer.addEventListener('mousemove', (event) => {
     timeDelay(targetElement)
   }
 })
+
+
+

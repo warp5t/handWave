@@ -1,5 +1,5 @@
 var mainContainer = document.getElementById('mainContainer');
-var lastTouchedCell = null; // Track the last touched cell
+var lastTouchedCell = null;
 function addColor(event) {
     var element = null;
     if (event instanceof MouseEvent) {
@@ -24,7 +24,7 @@ function removeColor(event) {
     }
 }
 function fillField() {
-    var heightCell = 10;
+    var heightCell = 10.2;
     var countY = Math.floor(window.innerHeight / heightCell);
     var countX = Math.floor(window.innerWidth / heightCell);
     var countCell = countX * countY;
@@ -39,6 +39,7 @@ fillField();
 function timeDelay(tEl) {
     setTimeout(function () {
         tEl.classList.remove('activCell');
+        window.javascript.gc();
     }, 50);
 }
 mainContainer.addEventListener('touchmove', function (event) {

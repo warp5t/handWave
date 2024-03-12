@@ -2,12 +2,15 @@
   position: relative;
   /* overflow: hidden; */
 }
+
 .main-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow: hidden;
+  overflow-y: hidden;
+  height: 100%;
 }
+
 .cell {
   transition-duration: 5s;
   height: 10px;
